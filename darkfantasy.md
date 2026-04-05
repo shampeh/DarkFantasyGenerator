@@ -1,90 +1,93 @@
----
-name: darkfantasy10
-description: Creates 6 Grok Image Dark Fantasy
----
-
-# Dark Fantasy Image Generation Flow
+# Dark Fantasy Image Generator — Project Instructions
 
 ## Overview
-Go to the Gemini Dark Fantasy 1.0 gem, generate 6 JSON image prompts, then submit each one to Grok Imagine in its own tab.
+
+Get 6 dark fantasy image prompts from the Gemini gem, then submit each to a separate Grok Imagine tab for parallel rendering. All 6 tabs generate simultaneously.
 
 ---
 
-## Step 1 — Get the prompts from Gemini
+## Step 1: Get Prompts from Gemini
 
-1. Navigate to: `https://gemini.google.com/gem/677970b32bbb`
-2. Click into the "Ask Gemini" input at the bottom, type `go`, and press Enter.
-3. Gemini responds with 6 JSON blocks. Each block looks like this:
+1. Navigate to `https://gemini.google.com/gem/677970b32bbb`
+2. Type `go` and submit
+3. Use `get_page_text` to extract the 6 JSON prompt blocks from the response
 
-```json
-{
-  "title": "...",
-  "prompt": "...",
-  "negative_prompt": "...",
-  "image_style": {
-    "aesthetic": "Dark Fantasy",
-    "lighting": "...",
-    "rendering": "Old washed-out fantasy illustration"
-  },
-  "aspect_ratio": "9:16"
-}
+---
+
+## Step 2: Submit Each Prompt to Grok Imagine
+
+Repeat the following for each of the 6 prompts:
+
+### a. Open tab and navigate
+```
+tabs_create_mcp → navigate to https://grok.com/imagine → wait 3 seconds
 ```
 
-Extract all 6 JSON blocks from Gemini's response using `get_page_text` — you'll need the **entire JSON block** for each one (not just the prompt text). Compact each block to a single line (no line breaks) before submitting to Grok.
+### b. Make the tab the active Chrome foreground tab
+```
+computer.screenshot(tabId)
+```
+**This step is required before typing.** `computer.type` sends keystrokes to whichever Chrome tab is currently the active foreground window — taking a screenshot forces this tab to be it.
 
----
-
-## Step 2 — Submit each prompt to Grok Imagine
-
-For each of the 6 prompts, open a new tab and run the following steps:
-
-1. Open a new tab and navigate to: `https://grok.com/imagine`
-2. Use JavaScript to insert the JSON into the contenteditable input and submit:
+### c. Focus the TipTap editor via JavaScript
+Direct coordinate clicks don't work — the outer container has `pointer-events: none`, so clicks pass through to gallery images underneath. Use JS to dispatch events directly on the editor element:
 
 ```javascript
-// Step 1: Insert the JSON text
-const ce = document.querySelector('[contenteditable]');
-ce.focus();
-document.execCommand('insertText', false, YOUR_JSON_STRING_HERE);
-
-// Step 2: Dispatch Enter key events to submit
-ce.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
-ce.dispatchEvent(new KeyboardEvent('keypress', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
-ce.dispatchEvent(new KeyboardEvent('keyup', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
+const editor = document.querySelector('.tiptap.ProseMirror');
+const rect = editor.getBoundingClientRect();
+['mousedown', 'mouseup', 'click'].forEach(type => {
+  editor.dispatchEvent(new MouseEvent(type, {
+    bubbles: true, cancelable: true,
+    clientX: rect.left + 200, clientY: rect.top + 10
+  }));
+});
+editor.focus();
 ```
 
-3. Confirm submission: the tab title will update to show the JSON content once the submission registers.
+Verify: `document.activeElement.className` should contain `tiptap ProseMirror`
 
-Repeat for all 6 prompts — each in its own tab so they generate in parallel.
+### d. Type the JSON prompt
+```
+computer.type(tabId, <JSON string>)
+```
 
----
+Verify: `document.querySelector('.tiptap.ProseMirror').textContent.substring(0, 50)` should show the start of the JSON.
 
-## Important Notes
+### e. Submit
+```
+find(tabId, "Submit button") → left_click(tabId, ref)
+```
 
-- **Do NOT try to click the "Type to imagine" floating bar** — it sits on top of the gallery image grid and clicks will land on gallery images instead. Use the JavaScript method above.
-- The `computer.key('Return')` action does **not** work on background tabs. Always use the JS `KeyboardEvent` dispatch method.
-- You must paste the **full JSON block** (compacted, no newlines), not just the `prompt` field. Grok reads the whole object.
-- Images generate in the background — scroll down on each tab to see them appear.
-- The tab title updates to the JSON content once submission registers successfully.
-- All 6 tabs can generate simultaneously.
+**Confirmation signal:** the tab title changes from `Imagine - Grok` to the full JSON string. If it navigates to the Discover page instead, the editor content was empty — retry from step c.
 
----
-
-## Quick Reference — Grok Imagine Settings
-
-The default settings (Image / Quality / 9:16) are already correct — no need to change them.
-
-| Setting | Value |
-|---|---|
-| Mode | Image |
-| Quality | Quality |
-| Aspect Ratio | 9:16 |
+### f. Wait 2 seconds
+The tab is already in the foreground, so Grok starts rendering immediately. Wait 2 seconds before opening the next tab.
 
 ---
 
-## URLs
+## Key Technical Notes
 
-| Service | URL |
-|---|---|
-| Gemini Dark Fantasy 1.0 Gem | `https://gemini.google.com/gem/677970b32bbb` |
-| Grok Imagine | `https://grok.com/imagine` |
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| Clicking input by coordinate focuses a background element | Outer container has `pointer-events: none` | Use JS MouseEvent dispatch on the editor element directly |
+| `document.execCommand('insertText')` doesn't work | Does not update React/TipTap state | Use `computer.type` after JS focus |
+| Typing goes to wrong tab | `computer.type` targets the active Chrome foreground window, not the tabId | Take a screenshot of the target tab first to make it foreground |
+| Submit navigates to Discover page | Editor content was empty when submitted | Always verify textContent before clicking Submit |
+| Grok doesn't render images | Tab is in the background when submitted | The tab must be the active foreground tab — the screenshot step handles this |
+
+---
+
+## The 6 Prompts
+
+All prompts use `"aspect_ratio": "9:16"` and the `"rendering": "Old washed-out fantasy illustration"` style.
+
+| # | Title | Lighting |
+|---|-------|---------|
+| 1 | The Last Sentinel | Pale moonlit silver |
+| 2 | Ritual of the Ash Grove | Cold teal haze and ember glow |
+| 3 | Monarch of the Ruined Peak | Smoky crimson storm light |
+| 4 | The Silent Cathedral | Dusty blue shafts and murky shadows |
+| 5 | Wanderer of the Ash Plains | Muted violet haze |
+| 6 | Grave of the First King | Blood-red moonlight and smoky shadows |
+
+Prompts are regenerated fresh each run by the Gemini gem — the titles and themes above are the expected output but may vary slightly run to run.
