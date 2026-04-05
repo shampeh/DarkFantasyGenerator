@@ -1,120 +1,107 @@
+
 ```
-////////////////////////////////////////////////////////////////////////////////
-//                                                                            //
-//  ██████╗  █████╗ ██████╗ ██╗  ██╗    ███████╗ █████╗ ███╗  ██╗████████╗  //
-//  ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ██╔════╝██╔══██╗████╗ ██║╚══██╔══╝  //
-//  ██║  ██║███████║██████╔╝█████╔╝     █████╗  ███████║██╔██╗██║   ██║     //
-//  ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██╔══╝  ██╔══██║██║╚████║   ██║     //
-//  ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║     ██║  ██║██║  ███║   ██║     //
-//  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝     ╚═╝  ╚═╝╚═╝  ╚══╝   ╚═╝    //
-//                                                                            //
-//              [ Gemini -> Grok Dark Fantasy Image Pipeline v1.0 ]          //
-//                                                                            //
-////////////////////////////////////////////////////////////////////////////////
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║    ██████╗  █████╗ ██████╗ ██╗  ██╗    ███████╗ █████╗ ███╗   ██╗          ║
+║    ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ██╔════╝██╔══██╗████╗  ██║          ║
+║    ██║  ██║███████║██████╔╝█████╔╝     █████╗  ███████║██╔██╗ ██║          ║
+║    ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██╔══╝  ██╔══██║██║╚██╗██║          ║
+║    ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║     ██║  ██║██║ ╚████║          ║
+║    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝          ║
+║                                                                              ║
+║             F A N T A S Y   I M A G E   G E N E R A T O R                  ║
+║                          v1.0 - PROPER                                       ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║  RELEASE . . : DarkFan.v1.0-WRAITH          SIZE . . . : 1 x claude        ║
+║  DATE  . . . : 2026-04-04                   TYPE . . . : automation        ║
+║  FORMAT  . . : browser / grok.com           OS   . . . : win / mac / lin   ║
+║  LANGUAGE  . : english                      REQS . . . : chrome + claude   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+```
 
- ╔══════════════════════════════════════════════════════════════════════════╗
- ║  RLS  DATE  :  2026                                                      ║
- ║  RLS  TYPE  :  Browser Automation / AI Image Generation Workflow         ║
- ║  SERVICES   :  Gemini (prompt gen) -> Grok Imagine (image gen)           ║
- ║  OUTPUT     :  6 x Dark Fantasy images, 9:16 aspect ratio                ║
- ║  METHOD     :  Claude in Chrome / JavaScript injection                   ║
- ╚══════════════════════════════════════════════════════════════════════════╝
+## RELEASE NOTES
 
- ┌──────────────────────────────────────────────────────────────────────────┐
- │  :: RELEASE NOTES                                                        │
- └──────────────────────────────────────────────────────────────────────────┘
+After weeks of failed attempts, pointer-events-none nightmares, and more
+empty form submissions than we care to count, WRAITH is proud to drop the
+first working release of the Dark Fantasy Image Generator automation flow.
 
-   Two-stage AI image pipeline. Stage one hits a custom Gemini gem to
-   generate 6 structured JSON image prompts in the dark fantasy aesthetic.
-   Stage two submits each prompt to Grok Imagine in its own tab via JS
-   injection — all 6 generate in parallel.
+This is the real deal. No cracks, no trainers. Just 6 cinematic dark fantasy
+images generating in parallel tabs while you go touch grass.
 
-   Do not deviate from the JavaScript submission method. Clicking the
-   Grok input directly does not work reliably. See nukes section.
+---
 
- ┌──────────────────────────────────────────────────────────────────────────┐
- │  :: URLS                                                                 │
- └──────────────────────────────────────────────────────────────────────────┘
+## WHAT IS THIS
 
-   Gemini Dark Fantasy 1.0 Gem   https://gemini.google.com/gem/677970b32bbb
-   Grok Imagine                  https://grok.com/imagine
+An automated workflow that:
 
- ┌──────────────────────────────────────────────────────────────────────────┐
- │  :: STEP 1 — GENERATE PROMPTS VIA GEMINI                                 │
- └──────────────────────────────────────────────────────────────────────────┘
+1. Hits the Gemini Dark Fantasy gem and pulls 6 JSON image prompts
+2. Opens 6 Grok Imagine tabs
+3. Submits each prompt using a cursed-but-working TipTap focus method
+4. Leaves all 6 tabs rendering simultaneously in the foreground
 
-   01.  Navigate to the Gemini gem URL above
-   02.  Click into the "Ask Gemini" input at the bottom
-   03.  Type  go  and press Enter
-   04.  Gemini responds with 6 JSON blocks in this format:
+All images render at **9:16 vertical** in an **old washed-out fantasy
+illustration** aesthetic. Think faded pigments, matte surfaces, dusty
+desaturated vibes. No glossy CGI slop.
 
-          {
-            "title": "...",
-            "prompt": "...",
-            "negative_prompt": "...",
-            "image_style": {
-              "aesthetic": "Dark Fantasy",
-              "lighting": "...",
-              "rendering": "Old washed-out fantasy illustration"
-            },
-            "aspect_ratio": "9:16"
-          }
+---
 
-   05.  Extract all 6 blocks using  get_page_text
-        Compact each block to a single line — no line breaks
+## THE SIX SCENES
 
- ┌──────────────────────────────────────────────────────────────────────────┐
- │  :: STEP 2 — SUBMIT TO GROK IMAGINE                                      │
- └──────────────────────────────────────────────────────────────────────────┘
+```
+  01. The Last Sentinel       [ moonlit knight on crumbling citadel cliff  ]
+  02. Ritual of the Ash Grove [ hooded pilgrim, teal mist, stone arch      ]
+  03. Monarch of the Ruined   [ antler-crowned throne, crimson storm sky   ]
+  04. The Silent Cathedral    [ skeletal priest, shattered stained glass   ]
+  05. Wanderer of the Ash     [ colossal stone beast, violet haze, mist   ]
+  06. Grave of the First King [ blood-red moon, grave mystic, wasteland   ]
+```
 
-   For each of the 6 prompts:
+---
 
-   01.  Open a new tab and navigate to  https://grok.com/imagine
-   02.  Inject the compacted JSON and submit via JavaScript:
+## INSTALL NOTES
 
-          const ce = document.querySelector('[contenteditable]');
-          ce.focus();
-          document.execCommand('insertText', false, YOUR_JSON_STRING_HERE);
+```
+  1. open chrome
+  2. have claude running in cowork mode
+  3. run the flow (see darkfantasygenerator.md for full technical notes)
+  4. wait
+  5. collect images
+```
 
-          ce.dispatchEvent(new KeyboardEvent('keydown',  {key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));
-          ce.dispatchEvent(new KeyboardEvent('keypress', {key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));
-          ce.dispatchEvent(new KeyboardEvent('keyup',    {key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));
+Requires an active Grok account with Imagine access.
+Gemini gem URL: `https://gemini.google.com/gem/677970b32bbb`
 
-   03.  Confirm: tab title will update to the JSON content once registered
-   04.  Repeat for all 6 prompts — each in its own tab
+---
 
-   All 6 tabs generate simultaneously. Scroll down on each tab to see output.
+## KNOWN ISSUES
 
- ┌──────────────────────────────────────────────────────────────────────────┐
- │  :: GROK SETTINGS                                                        │
- └──────────────────────────────────────────────────────────────────────────┘
+- `pointer-events: none` on the input container means you cannot click into
+  the prompt field by coordinate. fixed in this release via JS event dispatch.
 
-   Default settings are correct — do not change them.
+- Background tab throttling means Grok will not render unless the tab is
+  active. this release handles it. earlier releases did not.
 
-   Mode           Image
-   Quality        Quality
-   Aspect Ratio   9:16
+- `document.execCommand('insertText')` does not update React state and will
+  cause an empty form submission. do not use it. we learned this the hard way.
 
- ┌──────────────────────────────────────────────────────────────────────────┐
- │  :: KNOWN ISSUES / NUKES                                                 │
- └──────────────────────────────────────────────────────────────────────────┘
+---
 
-   [!]  Do NOT click the "Type to imagine" floating bar directly
-        It sits over the image gallery — clicks land on gallery images
-        Always use the JavaScript injection method above
+## GREETS
 
-   [!]  computer.key('Return') does NOT work on background tabs
-        Always use the JS KeyboardEvent dispatch method
+```
+  shouts to everyone who said "this should not be hard" and was correct
+  shouts to TipTap for being simultaneously the right tool and a nightmare
+  shouts to the pale moonlit knight, still standing on that cliff
+  no shouts to pointer-events: none
+```
 
-   [!]  Submit the FULL compacted JSON block — not just the prompt field
-        Grok reads the entire object
+---
 
-   [i]  Images generate in the background
-        Scroll down on each tab to see them appear
+## NFO
 
-   [i]  Tab title updates to the JSON content on successful submission
-
-////////////////////////////////////////////////////////////////////////////////
-//  Provided as-is for personal use. Use responsibly.                        //
-////////////////////////////////////////////////////////////////////////////////
+```
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │  WRAITH  2026  │  do not re-encode  │  keep the nfo  │  stay grim   │
+  └──────────────────────────────────────────────────────────────────────┘
 ```
